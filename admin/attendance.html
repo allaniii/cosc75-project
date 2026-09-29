@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>Attendance · CentriTruck</title>
+    <link rel="stylesheet" href="../assets/css/app.css" />
+  </head>
+  <body data-role="admin" data-page="attendance">
+    <a class="skip" href="#main">Skip to content</a>
+    <aside id="sidebar" class="sidebar" aria-label="Main navigation"></aside>
+    <header id="topbar" class="topbar"></header>
+    <main class="main" id="main">
+      <div class="page-header">
+        <div>
+          <h1>Attendance</h1>
+          <p>A complete view of driver activity and recorded shifts.</p>
+        </div>
+        <div class="flex">
+          <button
+            type="button"
+            class="icon-button"
+            id="refresh"
+            aria-label="Refresh records"
+          >
+            ↻
+          </button>
+        </div>
+      </div>
+      <div id="message" role="status" aria-live="polite"></div>
+      <div id="page-content">
+        <div class="grid grid-3">
+          <article class="card stat">
+            <div class="stat-icon" aria-hidden="true">▦</div>
+            <div class="stat-value" id="total">—</div>
+            <div class="stat-label">Total Records</div>
+            <div class="kpi-note"></div>
+          </article>
+          <article class="card stat">
+            <div class="stat-icon" aria-hidden="true">▦</div>
+            <div class="stat-value" id="tracked">—</div>
+            <div class="stat-label">Drivers Tracked</div>
+            <div class="kpi-note"></div>
+          </article>
+          <article class="card stat">
+            <div class="stat-icon" aria-hidden="true">▦</div>
+            <div class="stat-value" id="showing">—</div>
+            <div class="stat-label">Showing</div>
+            <div class="kpi-note"></div>
+          </article>
+        </div>
+        <section class="card section">
+          <div class="toolbar">
+            <label>Date<input type="date" id="date-filter" /></label
+            ><label
+              >Driver<select id="driver-filter">
+                <option value="">All drivers</option>
+              </select></label
+            ><button id="reset-filters" class="button secondary">Reset</button
+            ><span class="live" data-live>Connecting…</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Driver Name</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Time In</th>
+                  <th scope="col">Time Out</th>
+                  <th scope="col">Shift Duration</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody id="attendance-body">
+                <tr>
+                  <td colspan="6" class="empty">Loading records…</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+    <dialog class="modal" id="detail-dialog" aria-labelledby="detail-title">
+      <div class="modal-head">
+        <h2 id="detail-title">Record Details</h2>
+        <button class="icon-button" data-close aria-label="Close details">
+          ✕
+        </button>
+      </div>
+      <div class="modal-body" id="detail-body"></div>
+    </dialog>
+    <script type="module" src="../assets/js/pages/admin/attendance.js"></script>
+  </body>
+</html>

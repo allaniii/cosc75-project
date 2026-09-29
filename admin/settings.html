@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>Settings · CentriTruck</title>
+    <link rel="stylesheet" href="../assets/css/app.css" />
+  </head>
+  <body data-role="admin" data-page="settings">
+    <a class="skip" href="#main">Skip to content</a>
+    <aside id="sidebar" class="sidebar" aria-label="Main navigation"></aside>
+    <header id="topbar" class="topbar"></header>
+    <main class="main" id="main">
+      <div class="page-header">
+        <div>
+          <h1>Settings</h1>
+          <p>
+            Manage company details, driver accounts, and operational
+            configuration.
+          </p>
+        </div>
+        <div class="flex">
+          <button
+            type="button"
+            class="icon-button"
+            id="refresh"
+            aria-label="Refresh records"
+          >
+            ↻
+          </button>
+        </div>
+      </div>
+      <div id="message" role="status" aria-live="polite"></div>
+      <div id="page-content">
+        <div class="tabs" role="tablist">
+          <button
+            type="button"
+            role="tab"
+            data-tab="account"
+            aria-selected="true"
+            aria-controls="panel-account"
+          >
+            Account & Company</button
+          ><button
+            type="button"
+            role="tab"
+            data-tab="drivers"
+            aria-selected="false"
+            aria-controls="panel-drivers"
+          >
+            Driver Accounts</button
+          ><button
+            type="button"
+            role="tab"
+            data-tab="coding"
+            aria-selected="false"
+            aria-controls="panel-coding"
+          >
+            Coding Schedule
+          </button>
+        </div>
+        <div id="panel-account" role="tabpanel">
+          <div class="narrow stack">
+            <section class="card">
+              <div class="card-heading"><h2>Account Settings</h2></div>
+              <form id="profile-form" class="form-grid">
+                <label class=""
+                  >Full Name *<input
+                    type="text"
+                    name="full_name"
+                    id="full_name"
+                    required /></label
+                ><label class=""
+                  >Phone<input type="tel" name="phone" id="phone"
+                /></label>
+                <div class="full">
+                  <button class="button gold">Update My Profile</button>
+                </div>
+              </form>
+            </section>
+            <section class="card">
+              <div class="card-heading">
+                <h2>Company & Dispatch Configuration</h2>
+              </div>
+              <form id="company-form" class="form-grid">
+                <label class="full"
+                  >Company Name *<input
+                    type="text"
+                    name="company_name"
+                    id="company_name"
+                    required /></label
+                ><label class=""
+                  >Company Email<input
+                    type="email"
+                    name="email"
+                    id="email" /></label
+                ><label class=""
+                  >Company Phone<input
+                    type="tel"
+                    name="phone"
+                    id="phone" /></label
+                ><label class="full"
+                  >Company Address<input
+                    type="text"
+                    name="address"
+                    id="address" /></label
+                ><label class=""
+                  >Owner / Emergency Contact<input
+                    type="text"
+                    name="owner_name"
+                    id="owner_name" /></label
+                ><label class=""
+                  >Emergency Phone<input
+                    type="tel"
+                    name="owner_phone"
+                    id="owner_phone" /></label
+                ><label class=""
+                  >Default Coding Area<select
+                    name="default_area"
+                    id="default_area"
+                  ></select></label
+                ><label class=""
+                  >Due-soon Threshold (days) *<input
+                    type="number"
+                    name="due_soon_days"
+                    id="due_soon_days"
+                    required
+                    min="0"
+                    max="90" /></label
+                ><label class=""
+                  >Default Dispatch Duration (hours) *<input
+                    type="number"
+                    name="default_dispatch_hours"
+                    id="default_dispatch_hours"
+                    required
+                    min="1"
+                    max="72"
+                /></label>
+                <div class="full">
+                  <button class="button gold">Save Changes</button>
+                </div>
+              </form>
+            </section>
+          </div>
+        </div>
+        <div id="panel-drivers" role="tabpanel" hidden>
+          <section class="card">
+            <div class="card-heading"><h2>Create Driver Account</h2></div>
+            <p class="muted">
+              Creates a Supabase Auth identity and a linked driver profile.
+              Share initial credentials through your trusted channel.
+            </p>
+            <form id="driver-form" class="form-grid narrow">
+              <label class=""
+                >Driver Full Name *<input
+                  type="text"
+                  name="full_name"
+                  id="full_name"
+                  required /></label
+              ><label class=""
+                >Contact Number<input
+                  type="tel"
+                  name="phone"
+                  id="phone" /></label
+              ><label class=""
+                >Login Email *<input
+                  type="email"
+                  name="email"
+                  id="email"
+                  required /></label
+              ><label class=""
+                >Initial Password *<input
+                  type="password"
+                  name="password"
+                  id="password"
+                  required
+                  minlength="12"
+                  autocomplete="new-password" /></label
+              ><label class=""
+                >License Number *<input
+                  type="text"
+                  name="license_number"
+                  id="license_number"
+                  required /></label
+              ><label class=""
+                >License Expiry *<input
+                  type="date"
+                  name="license_expiry"
+                  id="license_expiry"
+                  required
+              /></label>
+              <div class="full">
+                <button class="button gold">＋ Create Driver Account</button>
+              </div>
+            </form>
+          </section>
+          <div class="section">
+            <section class="card">
+              <div class="card-heading"><h2>Registered Drivers</h2></div>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th scope="col">Driver</th>
+                      <th scope="col">License</th>
+                      <th scope="col">Expiry</th>
+                      <th scope="col">Contact</th>
+                      <th scope="col">Status</th>
+                      <th scope="col">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="drivers-body">
+                    <tr>
+                      <td colspan="6" class="empty">Loading records…</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+        </div>
+        <div id="panel-coding" role="tabpanel" hidden>
+          <section class="card">
+            <div class="card-heading"><h2>Coding Schedule</h2></div>
+            <div class="notice">
+              Rules are operational configuration, not legal advice. No active
+              policy is installed by default. Overnight windows are supported.
+            </div>
+            <div class="section">
+              <button id="add-rule" class="button gold">＋ Add Rule</button>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">Area</th>
+                    <th scope="col">Plate Digits</th>
+                    <th scope="col">Weekday</th>
+                    <th scope="col">Window (Manila)</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="rules-body">
+                  <tr>
+                    <td colspan="6" class="empty">Loading records…</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+          <div class="section">
+            <section class="card">
+              <div class="card-heading"><h2>Add Coding Area</h2></div>
+              <form id="area-form" class="form-grid narrow">
+                <label class=""
+                  >Stable Area ID *<input
+                    type="text"
+                    name="id"
+                    id="id"
+                    required
+                    pattern="[a-z0-9-]+"
+                    placeholder="cavite" /></label
+                ><label class=""
+                  >Display Name *<input
+                    type="text"
+                    name="name"
+                    id="name"
+                    required
+                /></label>
+                <div class="full">
+                  <button class="button secondary">Save Area</button>
+                </div>
+              </form>
+            </section>
+          </div>
+        </div>
+      </div>
+    </main>
+    <dialog id="rule-modal" class="modal" aria-labelledby="rule-modal-title">
+      <form id="rule-modal-form">
+        <div class="modal-head">
+          <h2 id="rule-modal-title">Coding Rule</h2>
+          <button
+            type="button"
+            class="icon-button"
+            data-close
+            aria-label="Close dialog"
+          >
+            ✕
+          </button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" name="id" />
+          <div class="form-grid">
+            <label class=""
+              >Area<select name="area_id" id="area_id"></select></label
+            ><label class=""
+              >Weekday<select name="weekday" id="weekday">
+                <option value="0">Sunday</option>
+                <option value="1">Monday</option>
+                <option value="2">Tuesday</option>
+                <option value="3">Wednesday</option>
+                <option value="4">Thursday</option>
+                <option value="5">Friday</option>
+                <option value="6">Saturday</option>
+              </select></label
+            ><label class=""
+              >Restricted Plate Digits *<input
+                type="text"
+                name="digits"
+                id="digits"
+                required
+                pattern="[0-9, ]+"
+                placeholder="1,2" /></label
+            ><label class=""
+              >Start Time *<input
+                type="time"
+                name="start_time"
+                id="start_time"
+                required /></label
+            ><label class=""
+              >End Time *<input
+                type="time"
+                name="end_time"
+                id="end_time"
+                required /></label
+            ><label class=""
+              >Policy Status<select name="enabled" id="enabled">
+                <option value="false">Disabled</option>
+                <option value="true">Enabled — verified policy</option>
+              </select></label
+            >
+          </div>
+        </div>
+        <p class="notice error modal-error" hidden role="alert"></p>
+        <div class="modal-foot">
+          <button type="button" class="button secondary" data-close>
+            Cancel</button
+          ><button class="button gold" type="submit">Save Changes</button>
+        </div>
+      </form>
+    </dialog>
+    <dialog class="modal" id="detail-dialog" aria-labelledby="detail-title">
+      <div class="modal-head">
+        <h2 id="detail-title">Record Details</h2>
+        <button class="icon-button" data-close aria-label="Close details">
+          ✕
+        </button>
+      </div>
+      <div class="modal-body" id="detail-body"></div>
+    </dialog>
+    <script type="module" src="../assets/js/pages/admin/settings.js"></script>
+  </body>
+</html>

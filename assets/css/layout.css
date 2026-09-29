@@ -1,0 +1,278 @@
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: var(--sidebar);
+  background: #0b0c0b;
+  color: #afb1b0;
+  display: flex;
+  flex-direction: column;
+  z-index: 40;
+}
+.brand {
+  height: 75px;
+  display: flex;
+  align-items: center;
+  padding: 24px;
+  border-bottom: 1px solid #242524;
+  color: #d0b659;
+  font-weight: 800;
+  font-size: 17px;
+  font-style: italic;
+  letter-spacing: -0.8px;
+}
+.brand span {
+  color: #fff;
+}
+.sidebar nav {
+  padding: 15px 12px;
+}
+.nav-link {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 14px;
+  border-radius: 5px;
+  margin-bottom: 4px;
+  font-size: 12px;
+}
+.nav-link:hover {
+  background: #181a18;
+  color: #fff;
+}
+.nav-link.active {
+  color: #ddbd43;
+  background: #292514;
+}
+.nav-link svg {
+  height: 15px;
+  width: 15px;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  fill: none;
+}
+.sidebar-footer {
+  margin-top: auto;
+  border-top: 1px solid #242524;
+  padding: 14px 12px;
+}
+.sidebar-footer button {
+  width: 100%;
+  color: inherit;
+  text-align: left;
+  background: none;
+  border: 0;
+}
+.topbar {
+  height: 66px;
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+  margin-left: var(--sidebar);
+  padding: 0 26px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+.crumb {
+  font-size: 11px;
+  color: #969c9e;
+}
+.crumb strong {
+  color: #303436;
+  font-weight: 500;
+}
+.user {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: #252516;
+  font-weight: 700;
+  font-size: 11px;
+}
+.user small {
+  display: block;
+  line-height: 1.2;
+}
+.user-name {
+  font-size: 12px;
+  font-weight: 600;
+}
+.main {
+  margin-left: var(--sidebar);
+  padding: 25px 26px 60px;
+  max-width: 1900px;
+}
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 24px;
+}
+.page-header p {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0;
+}
+.grid {
+  display: grid;
+  gap: var(--gap);
+}
+.grid-2 {
+  grid-template-columns: 1fr 1fr;
+}
+.grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+.grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+.dashboard-overview {
+  grid-template-columns: 1fr 2fr;
+}
+.stack {
+  display: grid;
+  gap: 20px;
+}
+.section {
+  margin-top: 20px;
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.full {
+  grid-column: 1/-1;
+}
+.narrow {
+  max-width: 930px;
+}
+.wide {
+  width: 100%;
+}
+.flex {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.between {
+  justify-content: space-between;
+}
+.wrap {
+  flex-wrap: wrap;
+}
+.menu-toggle {
+  display: none;
+}
+.login {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.login-art {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  background-color: #29241a;
+  /* Change this URL to your image in assets/images/. See docs/EDITING_GUIDE.md. */
+  background-image: url("../images/login-image.jpg");
+  background-position: left top;
+  /* Crop out the screenshot's form and baked-in text. Use cover for a photo. */
+  background-size: 100%;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+.login-art-copy {
+  width: 100%;
+  padding: 80px clamp(24px, 3.4vw, 64px) 32px;
+  color: white;
+  background: linear-gradient(transparent, rgb(0 0 0 / 85%));
+}
+.login-art-copy h2 {
+  max-width: 480px;
+  margin-bottom: 14px;
+  font-size: clamp(24px, 2vw, 32px);
+  line-height: 1.2;
+}
+.login-art-copy p {
+  max-width: 440px;
+  margin-bottom: 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.login-panel {
+  display: grid;
+  place-items: center;
+  padding: 36px;
+}
+.login-box {
+  width: 340px;
+  max-width: 100%;
+  background: white;
+  padding: 30px;
+  border-radius: 9px;
+}
+.login-box form {
+  display: grid;
+  gap: 18px;
+}
+.login-box h1 {
+  font-size: 23px;
+}
+.login-box .notice {
+  margin-top: 15px;
+}
+.login-foot {
+  text-align: center;
+  font-size: 10px;
+  color: var(--muted);
+  margin: 22px 0;
+}
+.contact-banner {
+  background: #0b0c0b;
+  color: white;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 7px;
+}
+.contact-banner p {
+  margin: 0;
+  color: #b0b5b3;
+  font-size: 11px;
+}
+.chart-wrap {
+  position: relative;
+  height: 240px;
+}
+.map {
+  height: 330px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #f0f4f4;
+}
+.notification-panel {
+  position: absolute;
+  right: 24px;
+  top: 60px;
+  width: 350px;
+  max-width: 90vw;
+  z-index: 60;
+  padding: 18px;
+  background: white;
+  box-shadow: 0 9px 40px #0002;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  max-height: 70vh;
+  overflow: auto;
+}

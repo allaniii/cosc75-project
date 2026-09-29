@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>Maintenance Monitoring · CentriTruck</title>
+    <link rel="stylesheet" href="../assets/css/app.css" />
+  </head>
+  <body data-role="admin" data-page="maintenance">
+    <a class="skip" href="#main">Skip to content</a>
+    <aside id="sidebar" class="sidebar" aria-label="Main navigation"></aside>
+    <header id="topbar" class="topbar"></header>
+    <main class="main" id="main">
+      <div class="page-header">
+        <div>
+          <h1>Maintenance Monitoring</h1>
+          <p>
+            Driver reports, maintenance schedules, history, and vehicle alerts.
+          </p>
+        </div>
+        <div class="flex">
+          <button class="button" id="add-service">
+            ＋ Schedule Maintenance</button
+          ><button
+            type="button"
+            class="icon-button"
+            id="refresh"
+            aria-label="Refresh records"
+          >
+            ↻
+          </button>
+        </div>
+      </div>
+      <div id="message" role="status" aria-live="polite"></div>
+      <div id="page-content">
+        <div class="grid grid-3">
+          <article class="card stat">
+            <div class="stat-icon" aria-hidden="true">▦</div>
+            <div class="stat-value" id="scheduled-count">—</div>
+            <div class="stat-label">Scheduled Maintenance</div>
+            <div class="kpi-note"></div>
+          </article>
+          <article class="card stat">
+            <div class="stat-icon" aria-hidden="true">⚒</div>
+            <div class="stat-value" id="repairs-count">—</div>
+            <div class="stat-label">Open Repairs</div>
+            <div class="kpi-note"></div>
+          </article>
+          <article class="card stat">
+            <div class="stat-icon" aria-hidden="true">!</div>
+            <div class="stat-value" id="urgent-count">—</div>
+            <div class="stat-label">Urgent Reports</div>
+            <div class="kpi-note"></div>
+          </article>
+        </div>
+        <div class="tabs" role="tablist">
+          <button
+            type="button"
+            role="tab"
+            data-tab="schedule"
+            aria-selected="true"
+            aria-controls="panel-schedule"
+          >
+            Schedule</button
+          ><button
+            type="button"
+            role="tab"
+            data-tab="history"
+            aria-selected="false"
+            aria-controls="panel-history"
+          >
+            Maintenance History</button
+          ><button
+            type="button"
+            role="tab"
+            data-tab="alerts"
+            aria-selected="false"
+            aria-controls="panel-alerts"
+          >
+            Alerts</button
+          ><button
+            type="button"
+            role="tab"
+            data-tab="reports"
+            aria-selected="false"
+            aria-controls="panel-reports"
+          >
+            Driver Reports
+          </button>
+        </div>
+        <div class="toolbar">
+          <label class="search"
+            >Search<input
+              type="search"
+              id="search"
+              placeholder="Search truck, service, mechanic or issue…" /></label
+          ><label
+            >Priority<select id="priority-filter">
+              <option value="">All priorities</option>
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+              <option value="urgent">Urgent</option>
+            </select></label
+          >
+        </div>
+        <div id="panel-schedule" role="tabpanel">
+          <section class="card">
+            <div class="card-heading"><h2>Scheduled Maintenance</h2></div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Truck</th>
+                    <th scope="col">Service Type</th>
+                    <th scope="col">Scheduled Date</th>
+                    <th scope="col">Priority</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Assigned Mechanic</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="schedule-body">
+                  <tr>
+                    <td colspan="8" class="empty">Loading records…</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+        <div id="panel-history" role="tabpanel" hidden>
+          <section class="card">
+            <div class="card-heading"><h2>Maintenance History</h2></div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Truck</th>
+                    <th scope="col">Service Type</th>
+                    <th scope="col">Scheduled Date</th>
+                    <th scope="col">Priority</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Assigned Mechanic</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="history-body">
+                  <tr>
+                    <td colspan="8" class="empty">Loading records…</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+        <div id="panel-alerts" role="tabpanel" hidden>
+          <section class="card">
+            <div class="card-heading"><h2>Active Alerts</h2></div>
+            <div id="alerts-list"></div>
+          </section>
+        </div>
+        <div id="panel-reports" role="tabpanel" hidden>
+          <section class="card">
+            <div class="card-heading"><h2>Driver Maintenance Queue</h2></div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">Report ID</th>
+                    <th scope="col">Driver</th>
+                    <th scope="col">Truck / Plate</th>
+                    <th scope="col">Issue</th>
+                    <th scope="col">Priority</th>
+                    <th scope="col">Review State</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="reports-body">
+                  <tr>
+                    <td colspan="7" class="empty">Loading records…</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+    <dialog
+      id="service-modal"
+      class="modal"
+      aria-labelledby="service-modal-title"
+    >
+      <form id="service-modal-form">
+        <div class="modal-head">
+          <h2 id="service-modal-title">Maintenance Work</h2>
+          <button
+            type="button"
+            class="icon-button"
+            data-close
+            aria-label="Close dialog"
+          >
+            ✕
+          </button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" name="id" />
+          <div class="form-grid">
+            <label class=""
+              >Truck *<select
+                name="truck_id"
+                id="truck_id"
+                required
+              ></select></label
+            ><label class=""
+              >Originating Report<select name="report_id" id="report_id">
+                <option value="">Routine service</option>
+              </select></label
+            ><label class=""
+              >Service Type *<input
+                type="text"
+                name="service_type"
+                id="service_type"
+                required /></label
+            ><label class=""
+              >Assigned Mechanic<input
+                type="text"
+                name="mechanic"
+                id="mechanic" /></label
+            ><label class=""
+              >Scheduled Start (Manila) *<input
+                type="datetime-local"
+                name="scheduled_at"
+                id="scheduled_at"
+                required /></label
+            ><label class=""
+              >Expected End (Manila) *<input
+                type="datetime-local"
+                name="ends_at"
+                id="ends_at"
+                required /></label
+            ><label class=""
+              >Priority<select name="priority" id="priority">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+                <option value="urgent">Urgent</option>
+              </select></label
+            ><label class=""
+              >Work Status<select name="status" id="status">
+                <option value="scheduled">Scheduled</option>
+                <option value="in_progress">In Progress</option>
+                <option value="completed">Completed</option>
+                <option value="cancelled">Cancelled</option>
+              </select></label
+            ><label class=""
+              >Actual Cost (PHP)<input
+                type="number"
+                name="cost"
+                id="cost"
+                min="0"
+                step="0.01" /></label
+            ><label class=""
+              >Next Maintenance<input
+                type="date"
+                name="next_maintenance"
+                id="next_maintenance" /></label
+            ><label class="full"
+              >Work Notes / Resolution<textarea
+                name="notes"
+                id="notes"
+              ></textarea>
+            </label>
+          </div>
+        </div>
+        <p class="notice error modal-error" hidden role="alert"></p>
+        <div class="modal-foot">
+          <button type="button" class="button secondary" data-close>
+            Cancel</button
+          ><button class="button gold" type="submit">Save Changes</button>
+        </div>
+      </form>
+    </dialog>
+    <dialog
+      id="review-modal"
+      class="modal"
+      aria-labelledby="review-modal-title"
+    >
+      <form id="review-modal-form">
+        <div class="modal-head">
+          <h2 id="review-modal-title">Review Driver Report</h2>
+          <button
+            type="button"
+            class="icon-button"
+            data-close
+            aria-label="Close dialog"
+          >
+            ✕
+          </button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" name="id" />
+          <div class="form-grid">
+            <label class=""
+              >Review State<select name="review_state" id="review_state">
+                <option value="reviewed">Reviewed</option>
+                <option value="resolved">Resolved</option>
+                <option value="dismissed">Dismissed</option>
+              </select></label
+            ><label class="full"
+              >Resolution / Reason<textarea
+                name="resolution"
+                id="resolution"
+              ></textarea>
+            </label>
+          </div>
+        </div>
+        <p class="notice error modal-error" hidden role="alert"></p>
+        <div class="modal-foot">
+          <button type="button" class="button secondary" data-close>
+            Cancel</button
+          ><button class="button gold" type="submit">Save Changes</button>
+        </div>
+      </form>
+    </dialog>
+    <dialog class="modal" id="detail-dialog" aria-labelledby="detail-title">
+      <div class="modal-head">
+        <h2 id="detail-title">Record Details</h2>
+        <button class="icon-button" data-close aria-label="Close details">
+          ✕
+        </button>
+      </div>
+      <div class="modal-body" id="detail-body"></div>
+    </dialog>
+    <script
+      type="module"
+      src="../assets/js/pages/admin/maintenance.js"
+    ></script>
+  </body>
+</html>

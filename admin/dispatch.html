@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>Dispatch Management · CentriTruck</title>
+    <link rel="stylesheet" href="../assets/css/app.css" />
+  </head>
+  <body data-role="admin" data-page="dispatch">
+    <a class="skip" href="#main">Skip to content</a>
+    <aside id="sidebar" class="sidebar" aria-label="Main navigation"></aside>
+    <header id="topbar" class="topbar"></header>
+    <main class="main" id="main">
+      <div class="page-header">
+        <div>
+          <h1>Dispatch Management</h1>
+          <p>
+            Manage trips and assignments, track fleet availability, and review
+            trip history.
+          </p>
+        </div>
+        <div class="flex">
+          <button id="new-dispatch" class="button">＋ New Dispatch</button
+          ><button
+            type="button"
+            class="icon-button"
+            id="refresh"
+            aria-label="Refresh records"
+          >
+            ↻
+          </button>
+        </div>
+      </div>
+      <div id="message" role="status" aria-live="polite"></div>
+      <div id="page-content">
+        <div class="grid grid-3">
+          <article class="card stat">
+            <div class="stat-icon" aria-hidden="true">▦</div>
+            <div class="stat-value" id="on-route">—</div>
+            <div class="stat-label">On Route</div>
+            <div class="kpi-note"></div>
+          </article>
+          <article class="card stat">
+            <div class="stat-icon" aria-hidden="true">▦</div>
+            <div class="stat-value" id="available">—</div>
+            <div class="stat-label">Available Now</div>
+            <div class="kpi-note"></div>
+          </article>
+          <article class="card stat">
+            <div class="stat-icon" aria-hidden="true">▦</div>
+            <div class="stat-value" id="restricted">—</div>
+            <div class="stat-label">Coding Restricted Today</div>
+            <div class="kpi-note"></div>
+          </article>
+        </div>
+        <section class="card section">
+          <div class="card-heading">
+            <h2>Philippine Route Map</h2>
+            <select
+              id="route-select"
+              aria-label="Select a dispatch route"
+              style="max-width: 360px"
+            ></select>
+          </div>
+          <p id="route-summary" class="muted">
+            Choose a dispatch to see its route.
+          </p>
+          <div id="route-candidates" class="form-grid" hidden>
+            <label>Confirm pickup<select id="pickup-choice"></select></label
+            ><label
+              >Confirm destination<select
+                id="destination-choice"
+              ></select></label
+            ><button class="button gold" id="draw-route">
+              Show Road Route
+            </button>
+          </div>
+          <div id="route-map" class="map" aria-label="Route map"></div>
+          <p>
+            <a
+              id="directions-link"
+              class="subtle-link"
+              target="_blank"
+              rel="noopener noreferrer"
+              hidden
+              >Open external directions</a
+            >
+          </p>
+        </section>
+        <div class="tabs" role="tablist">
+          <button
+            type="button"
+            role="tab"
+            data-tab="schedule"
+            aria-selected="true"
+            aria-controls="panel-schedule"
+          >
+            Dispatch Schedule</button
+          ><button
+            type="button"
+            role="tab"
+            data-tab="history"
+            aria-selected="false"
+            aria-controls="panel-history"
+          >
+            Trip History
+          </button>
+        </div>
+        <section class="card">
+          <div class="toolbar">
+            <label class="search"
+              >Search<input
+                id="search"
+                type="search"
+                placeholder="Search dispatch, driver, plate or destination…" /></label
+            ><label>Date<input type="date" id="date-filter" /></label
+            ><button id="reset-filters" class="button secondary">Reset</button>
+          </div>
+          <div id="panel-schedule" role="tabpanel">
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">Dispatch ID</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Driver</th>
+                    <th scope="col">Plate Number</th>
+                    <th scope="col">Destination</th>
+                    <th scope="col">Schedule</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="schedule-body">
+                  <tr>
+                    <td colspan="8" class="empty">Loading records…</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div id="panel-history" role="tabpanel" hidden>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">Dispatch ID</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Driver</th>
+                    <th scope="col">Plate Number</th>
+                    <th scope="col">Destination</th>
+                    <th scope="col">Schedule</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="history-body">
+                  <tr>
+                    <td colspan="8" class="empty">Loading records…</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+    <dialog
+      id="dispatch-modal"
+      class="modal"
+      aria-labelledby="dispatch-modal-title"
+    >
+      <form id="dispatch-modal-form">
+        <div class="modal-head">
+          <h2 id="dispatch-modal-title">Add / Edit Dispatch</h2>
+          <button
+            type="button"
+            class="icon-button"
+            data-close
+            aria-label="Close dialog"
+          >
+            ✕
+          </button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" name="id" />
+          <div class="form-grid">
+            <label class=""
+              >Dispatch ID (generated if blank)<input
+                type="text"
+                name="code"
+                id="code" /></label
+            ><label class=""
+              >Coding Area *<select
+                name="area_id"
+                id="area_id"
+                required
+              ></select></label
+            ><label class=""
+              >Driver *<select
+                name="driver_id"
+                id="driver_id"
+                required
+              ></select></label
+            ><label class=""
+              >Truck *<select name="truck_id" id="truck_id" required></select
+            ></label>
+            <div id="truck-preview" class="notice full">
+              Select a truck and schedule to check eligibility.
+            </div>
+            <label class=""
+              >Schedule / Start (Manila) *<input
+                type="datetime-local"
+                name="starts_at"
+                id="starts_at"
+                required /></label
+            ><label class=""
+              >Expected Completion (Manila) *<input
+                type="datetime-local"
+                name="ends_at"
+                id="ends_at"
+                required /></label
+            ><label class="full"
+              >Client / Delivery *<input
+                type="text"
+                name="client"
+                id="client"
+                required /></label
+            ><label class=""
+              >Pickup Location *<input
+                type="text"
+                name="pickup"
+                id="pickup"
+                required /></label
+            ><label class=""
+              >Delivery Location *<input
+                type="text"
+                name="destination"
+                id="destination"
+                required
+            /></label>
+            <div class="full">
+              <p class="muted">
+                Optional coordinates make the route exact. Otherwise, choose
+                geocoding results in the map.
+              </p>
+            </div>
+            <label class=""
+              >Pickup Latitude<input
+                type="number"
+                name="pickup_lat"
+                id="pickup_lat"
+                step="any"
+                min="-90"
+                max="90" /></label
+            ><label class=""
+              >Pickup Longitude<input
+                type="number"
+                name="pickup_lon"
+                id="pickup_lon"
+                step="any"
+                min="-180"
+                max="180" /></label
+            ><label class=""
+              >Destination Latitude<input
+                type="number"
+                name="destination_lat"
+                id="destination_lat"
+                step="any"
+                min="-90"
+                max="90" /></label
+            ><label class=""
+              >Destination Longitude<input
+                type="number"
+                name="destination_lon"
+                id="destination_lon"
+                step="any"
+                min="-180"
+                max="180" /></label
+            ><label class=""
+              >Delivery Status<select name="status" id="status">
+                <option value="scheduled">Scheduled — not departed</option>
+              </select></label
+            ><label class="full"
+              >Notes<textarea name="notes" id="notes"></textarea>
+            </label>
+          </div>
+        </div>
+        <p class="notice error modal-error" hidden role="alert"></p>
+        <div class="modal-foot">
+          <button type="button" class="button secondary" data-close>
+            Cancel</button
+          ><button class="button gold" type="submit">Save Dispatch</button>
+        </div>
+      </form>
+    </dialog>
+    <dialog class="modal" id="detail-dialog" aria-labelledby="detail-title">
+      <div class="modal-head">
+        <h2 id="detail-title">Record Details</h2>
+        <button class="icon-button" data-close aria-label="Close details">
+          ✕
+        </button>
+      </div>
+      <div class="modal-body" id="detail-body"></div>
+    </dialog>
+    <script type="module" src="../assets/js/pages/admin/dispatch.js"></script>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+:root {
+  --sidebar: 214px;
+  --gold: #cead32;
+  --gold-soft: #fbf7e6;
+  --ink: #161718;
+  --muted: #7b8185;
+  --surface: #fff;
+  --canvas: #f8f9fa;
+  --line: #edf0f1;
+  --green: #12866e;
+  --red: #db4c59;
+  --orange: #c48c23;
+  --radius: 8px;
+  --gap: 20px;
+  --shadow: 0 4px 24px #10101008;
+}
