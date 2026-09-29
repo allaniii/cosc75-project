@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>Report Maintenance · CentriTruck</title>
+    <script type="module" crossorigin src="../assets/driver/maintenance-v3Y7ObIN.js"></script>
+    <link rel="modulepreload" crossorigin href="../assets/dom-B0CXGCmh.js">
+    <link rel="modulepreload" crossorigin href="../assets/format-ClMacsmK.js">
+    <link rel="modulepreload" crossorigin href="../assets/data-pyuLZmnN.js">
+    <link rel="modulepreload" crossorigin href="../assets/maintenance-CGIlAtmh.js">
+    <link rel="stylesheet" crossorigin href="../assets/dom-CN4zQz5b.css">
+  </head>
+  <body data-role="driver" data-page="maintenance">
+    <a class="skip" href="#main">Skip to content</a>
+    <aside id="sidebar" class="sidebar" aria-label="Main navigation"></aside>
+    <header id="topbar" class="topbar"></header>
+    <main class="main" id="main">
+      <div class="page-header">
+        <div>
+          <h1>Report Maintenance</h1>
+          <p>
+            Report a problem with your assigned truck and reach the owner
+            quickly.
+          </p>
+        </div>
+        <div class="flex">
+          <button
+            type="button"
+            class="icon-button"
+            id="refresh"
+            aria-label="Refresh records"
+          >
+            ↻
+          </button>
+        </div>
+      </div>
+      <div id="message" role="status" aria-live="polite"></div>
+      <div id="page-content">
+        <section class="contact-banner">
+          <div>
+            <h2>Having a problem with the truck?</h2>
+            <p id="owner-info">Owner contact will appear when configured.</p>
+          </div>
+          <a class="button gold" id="contact-owner" hidden>☎ Contact Owner</a>
+        </section>
+        <div class="section">
+          <section class="card">
+            <div class="card-heading"><h2>Submit Maintenance Report</h2></div>
+            <form id="issue-form" class="form-grid">
+              <label class=""
+                >Assigned Truck *<select
+                  name="truck_id"
+                  id="truck_id"
+                  required
+                ></select></label
+              ><label class=""
+                >Issue Category *<select name="category" id="category" required>
+                  <option value="Engine">Engine</option>
+                  <option value="Brakes">Brakes</option>
+                  <option value="Cooling System">Cooling System</option>
+                  <option value="Lights">Lights</option>
+                  <option value="Tires">Tires</option>
+                  <option value="Transmission">Transmission</option>
+                  <option value="Other">Other</option>
+                </select></label
+              ><label class=""
+                >Priority<select name="priority" id="priority">
+                  <option value="low">Low</option>
+                  <option value="medium">Medium</option>
+                  <option value="high">High</option>
+                  <option value="urgent">Urgent</option>
+                </select></label
+              ><label class=""
+                >Location / Street<input
+                  type="text"
+                  name="location"
+                  id="location" /></label
+              ><label class="full"
+                >Problem Description *<textarea
+                  name="description"
+                  id="description"
+                  required
+                  minlength="10"
+                  maxlength="4000"
+                ></textarea></label
+              ><label class="upload full"
+                >Photo (optional · JPEG / PNG / WebP · max 5 MB)<input
+                  type="file"
+                  name="photo"
+                  accept="image/jpeg,image/png,image/webp"
+              /></label>
+              <div class="full">
+                <button class="button">Submit Report</button>
+              </div>
+            </form>
+          </section>
+        </div>
+        <div class="section">
+          <section class="card">
+            <div class="card-heading">
+              <h2>
+                Submitted Reports History
+                <span class="live" data-live>Connecting…</span>
+              </h2>
+            </div>
+            <div id="report-history"></div>
+          </section>
+        </div>
+      </div>
+    </main>
+    <dialog class="modal" id="detail-dialog" aria-labelledby="detail-title">
+      <div class="modal-head">
+        <h2 id="detail-title">Record Details</h2>
+        <button class="icon-button" data-close aria-label="Close details">
+          ✕
+        </button>
+      </div>
+      <div class="modal-body" id="detail-body"></div>
+    </dialog>
+  </body>
+</html>

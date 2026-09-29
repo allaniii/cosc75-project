@@ -1,0 +1,27 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> centritruck@1.0.0 test:browser
+> node tests/browser.mjs
+
+PASS admin/dashboard.html direct URL and refresh
+PASS admin/trucks.html direct URL and refresh
+PASS admin/dispatch.html direct URL and refresh
+PASS admin/maintenance.html direct URL and refresh
+PASS admin/attendance.html direct URL and refresh
+PASS admin/reports.html direct URL and refresh
+PASS admin/settings.html direct URL and refresh
+PASS truck modal, create, and search
+PASS mobile table and navigation stay inside viewport
+PASS driver/dashboard.html direct URL and refresh
+PASS driver/attendance.html direct URL and refresh
+PASS driver/my-truck.html direct URL and refresh
+PASS driver/delivery-status.html direct URL and refresh
+PASS driver/maintenance.html direct URL and refresh
+PASS driver route guard redirects admin URLs
+PASS driver time in and time out saved through real SQL RPC
+PASS delivery radio selection does not save before confirmation
+PASS maintenance submission appears in own history
+PASS login page and unauthenticated guard
+PASS recovery and entry HTML pages exist
+
+20 browser checks passed. Browser transport/Auth are fixtures; workflow RPCs use the real migration in local PGlite.

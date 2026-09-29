@@ -1,0 +1,52 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> centritruck@1.0.0 test:db
+> node tests/database.mjs
+
+PASS anonymous cannot read operational data
+PASS anonymous cannot mutate
+PASS plates normalize and trucks are stored
+PASS normalized plate uniqueness
+PASS unused truck can be deleted
+PASS referenced truck cannot be deleted
+PASS driver only sees assigned truck and own profile
+PASS driver cannot forge role by direct update
+PASS driver can read only own private image objects
+PASS direct image upload bypass is rejected
+PASS driver cannot call admin mutation
+PASS driver cannot query an unauthorized truck state
+PASS time out without active shift rejected
+PASS idempotent retry returns same shift
+PASS second time in cannot create another active shift
+PASS request id cannot be reused for different action
+PASS multiple completed shifts in one day allowed
+PASS other driver cannot read attendance
+PASS coding includes exact start boundary
+PASS coding excludes exact end boundary
+PASS coding area isolation
+PASS overnight rule includes next day
+PASS overnight end boundary excludes next trip
+PASS coding blocks backend dispatch even with forged UI
+PASS disabled coding rules do not restrict
+PASS truck overlap rejected
+PASS driver overlap on another truck rejected
+PASS adjacent dispatch intervals allowed
+PASS empty/invalid intervals rejected
+PASS forged delivery ownership rejected
+PASS cannot jump directly from scheduled to delivered
+PASS delivery retry does not add duplicate status log
+PASS completed dispatch cannot be reopened
+PASS delivery logs are immutable
+PASS forged maintenance report truck rejected
+PASS urgent/high report locks truck
+PASS other driver cannot see maintenance issue
+PASS maintenance block enforced on dispatch
+PASS cancelled service does not release unresolved report lock
+PASS completing linked repair atomically resolves report and lock
+PASS deactivated driver immediately loses read access
+PASS deactivated driver cannot mutate with old token
+PASS all public app tables have RLS enabled
+PASS no public-schema SECURITY DEFINER functions
+PASS Realtime publication contains required operational tables
+
+45 database checks passed. Local PGlite PostgreSQL engine; hosted Supabase services and parallel sessions are not covered.

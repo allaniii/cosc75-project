@@ -1,0 +1,1 @@
+import{O as e,j as t,k as n}from"./dom-B0CXGCmh.js";var r=e=>n(`coding_save`,e),i=(n,r,i=new Date().toISOString(),a=new Date(Date.now()+6e4).toISOString())=>e(t().rpc(`check_coding`,{truck_id:n,area_id:r,starts_at:i,ends_at:a})),a=e=>n(`area_save`,e);export{a as n,r,i as t};

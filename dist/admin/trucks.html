@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>Truck Management · CentriTruck</title>
+    <script type="module" crossorigin src="../assets/admin/trucks-CnGF5EPX.js"></script>
+    <link rel="modulepreload" crossorigin href="../assets/dom-B0CXGCmh.js">
+    <link rel="modulepreload" crossorigin href="../assets/format-ClMacsmK.js">
+    <link rel="modulepreload" crossorigin href="../assets/data-pyuLZmnN.js">
+    <link rel="modulepreload" crossorigin href="../assets/coding-D5QkQvgx.js">
+    <link rel="stylesheet" crossorigin href="../assets/dom-CN4zQz5b.css">
+  </head>
+  <body data-role="admin" data-page="trucks">
+    <a class="skip" href="#main">Skip to content</a>
+    <aside id="sidebar" class="sidebar" aria-label="Main navigation"></aside>
+    <header id="topbar" class="topbar"></header>
+    <main class="main" id="main">
+      <div class="page-header">
+        <div>
+          <h1>Truck Management</h1>
+          <p>Monitor the company fleet and keep every vehicle ready.</p>
+        </div>
+        <div class="flex">
+          <button class="button" id="add-truck">＋ Add Truck</button
+          ><button
+            type="button"
+            class="icon-button"
+            id="refresh"
+            aria-label="Refresh records"
+          >
+            ↻
+          </button>
+        </div>
+      </div>
+      <div id="message" role="status" aria-live="polite"></div>
+      <div id="page-content">
+        <div class="grid grid-3">
+          <article class="card stat">
+            <div class="stat-icon" aria-hidden="true">▦</div>
+            <div class="stat-value" id="total">—</div>
+            <div class="stat-label">Total Trucks</div>
+            <div class="kpi-note"></div>
+          </article>
+          <article class="card stat">
+            <div class="stat-icon" aria-hidden="true">⚒</div>
+            <div class="stat-value" id="needs-service">—</div>
+            <div class="stat-label">Needing Inspection / Check</div>
+            <div class="kpi-note"></div>
+          </article>
+          <article class="card stat">
+            <div class="stat-icon" aria-hidden="true">▦</div>
+            <div class="stat-value" id="available">—</div>
+            <div class="stat-label">Available Now</div>
+            <div class="kpi-note"></div>
+          </article>
+        </div>
+        <section class="card section">
+          <div class="toolbar">
+            <label class="search"
+              >Search<input
+                id="search"
+                type="search"
+                placeholder="Search by truck, plate, type or driver…" /></label
+            ><label
+              >Maintenance<select id="maintenance-filter">
+                <option value="">All</option>
+                <option>Up to date</option>
+                <option>Due Soon</option>
+                <option>Overdue</option>
+                <option>Not scheduled</option>
+              </select></label
+            ><label
+              >Fleet<select id="archive-filter">
+                <option value="active">Active trucks</option>
+                <option value="archived">Archived trucks</option>
+              </select></label
+            >
+          </div>
+          <p class="muted" id="coding-context"></p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Truck ID</th>
+                  <th scope="col">Plate Number</th>
+                  <th scope="col">Truck Type</th>
+                  <th scope="col">Assigned Driver</th>
+                  <th scope="col">Maintenance Status</th>
+                  <th scope="col">Coding Today</th>
+                  <th scope="col">Next Maintenance</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="trucks-body">
+                <tr>
+                  <td colspan="8" class="empty">Loading records…</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+    <dialog id="truck-modal" class="modal" aria-labelledby="truck-modal-title">
+      <form id="truck-modal-form">
+        <div class="modal-head">
+          <h2 id="truck-modal-title">Truck Details</h2>
+          <button
+            type="button"
+            class="icon-button"
+            data-close
+            aria-label="Close dialog"
+          >
+            ✕
+          </button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" name="id" />
+          <div class="form-grid">
+            <label class=""
+              >Truck ID (generated if blank)<input
+                type="text"
+                name="code"
+                id="code" /></label
+            ><label class=""
+              >Plate Number *<input
+                type="text"
+                name="plate"
+                id="plate"
+                required /></label
+            ><label class=""
+              >Truck Type *<select name="truck_type" id="truck_type" required>
+                <option value="Cargo Truck">Cargo Truck</option>
+                <option value="Closed Van">Closed Van</option>
+                <option value="Refrigerated Van">Refrigerated Van</option>
+                <option value="Flatbed Truck">Flatbed Truck</option>
+                <option value="Trailer">Trailer</option>
+              </select></label
+            ><label class=""
+              >Assigned Driver<select name="driver_id" id="driver_id">
+                <option value="">Unassigned</option>
+              </select></label
+            ><label class=""
+              >Make *<input type="text" name="make" id="make" required /></label
+            ><label class=""
+              >Model *<input
+                type="text"
+                name="model"
+                id="model"
+                required /></label
+            ><label class=""
+              >Year<input
+                type="number"
+                name="year"
+                id="year"
+                min="1950"
+                max="2200" /></label
+            ><label class=""
+              >Mileage (km)<input
+                type="number"
+                name="mileage"
+                id="mileage"
+                min="0"
+                step="0.1" /></label
+            ><label class=""
+              >Condition<input
+                type="text"
+                name="condition"
+                id="condition" /></label
+            ><label class=""
+              >Engine Number<input
+                type="text"
+                name="engine_number"
+                id="engine_number" /></label
+            ><label class=""
+              >Registration Expiry<input
+                type="date"
+                name="registration_expiry"
+                id="registration_expiry" /></label
+            ><label class=""
+              >Availability<select name="base_status" id="base_status">
+                <option value="available">Available</option>
+                <option value="out_of_service">Out of Service</option>
+              </select></label
+            ><label class=""
+              >Last Maintenance<input
+                type="date"
+                name="last_maintenance"
+                id="last_maintenance" /></label
+            ><label class=""
+              >Next Maintenance<input
+                type="date"
+                name="next_maintenance"
+                id="next_maintenance" /></label
+            ><label class="full"
+              >Notes<textarea name="notes" id="notes"></textarea>
+            </label>
+          </div>
+        </div>
+        <p class="notice error modal-error" hidden role="alert"></p>
+        <div class="modal-foot">
+          <button type="button" class="button secondary" data-close>
+            Cancel</button
+          ><button class="button gold" type="submit">Save Truck</button>
+        </div>
+      </form>
+    </dialog>
+    <dialog class="modal" id="detail-dialog" aria-labelledby="detail-title">
+      <div class="modal-head">
+        <h2 id="detail-title">Record Details</h2>
+        <button class="icon-button" data-close aria-label="Close details">
+          ✕
+        </button>
+      </div>
+      <div class="modal-body" id="detail-body"></div>
+    </dialog>
+  </body>
+</html>

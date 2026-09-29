@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>Dashboard · CentriTruck</title>
+    <script type="module" crossorigin src="../assets/admin/dashboard-baruRU44.js"></script>
+    <link rel="modulepreload" crossorigin href="../assets/dom-B0CXGCmh.js">
+    <link rel="modulepreload" crossorigin href="../assets/format-ClMacsmK.js">
+    <link rel="modulepreload" crossorigin href="../assets/data-pyuLZmnN.js">
+    <link rel="modulepreload" crossorigin href="../assets/chart-ClTYS3A0.js">
+    <link rel="stylesheet" crossorigin href="../assets/dom-CN4zQz5b.css">
+  </head>
+  <body data-role="admin" data-page="dashboard">
+    <a class="skip" href="#main">Skip to content</a>
+    <aside id="sidebar" class="sidebar" aria-label="Main navigation"></aside>
+    <header id="topbar" class="topbar"></header>
+    <main class="main" id="main">
+      <div class="page-header">
+        <div>
+          <h1>Dashboard</h1>
+          <p>Welcome back. Your fleet overview for today.</p>
+        </div>
+        <div class="flex">
+          <button
+            type="button"
+            class="icon-button"
+            id="refresh"
+            aria-label="Refresh records"
+          >
+            ↻
+          </button>
+        </div>
+      </div>
+      <div id="message" role="status" aria-live="polite"></div>
+      <div id="page-content">
+        <div class="grid grid-3">
+          <article class="card stat">
+            <div class="stat-icon" aria-hidden="true">▱</div>
+            <div class="stat-value" id="truck-count">—</div>
+            <div class="stat-label">Total Trucks</div>
+            <div class="kpi-note">Non-archived fleet</div>
+          </article>
+          <article class="card stat">
+            <div class="stat-icon" aria-hidden="true">▰</div>
+            <div class="stat-value" id="active-count">—</div>
+            <div class="stat-label">Active Dispatch</div>
+            <div class="kpi-note">Scheduled, On the Way, Not Yet Delivered</div>
+          </article>
+          <article class="card stat">
+            <div class="stat-icon" aria-hidden="true">⚒</div>
+            <div class="stat-value" id="alert-count">—</div>
+            <div class="stat-label">Maintenance Alert</div>
+            <div class="kpi-note">Open high / urgent reports + due service</div>
+          </article>
+        </div>
+        <div class="grid dashboard-overview section">
+          <section class="card">
+            <div class="card-heading"><h2>Truck Information</h2></div>
+            <dl id="truck-info"></dl>
+          </section>
+          <section class="card">
+            <div class="card-heading"><h2>Weekly Operations Activity</h2></div>
+            <div class="chart-wrap">
+              <canvas
+                id="weekly-chart"
+                aria-label="Dispatches started per Manila date"
+                role="img"
+              ></canvas>
+            </div>
+          </section>
+        </div>
+        <div class="grid grid-2 section">
+          <section class="card">
+            <div class="card-heading"><h2>Recent Dispatch</h2></div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">Dispatch ID</th>
+                    <th scope="col">Route</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody id="recent-body">
+                  <tr>
+                    <td colspan="3" class="empty">Loading records…</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+          <section class="card">
+            <div class="card-heading"><h2>Maintenance Alert</h2></div>
+            <div id="alerts-list"></div>
+          </section>
+        </div>
+        <div class="stack section">
+          <section class="card">
+            <div class="card-heading">
+              <h2>
+                Driver Attendance Monitoring
+                <span class="live" data-live>Connecting…</span>
+              </h2>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">Driver Name</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Time In</th>
+                    <th scope="col">Time Out</th>
+                    <th scope="col">Shift Duration</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody id="attendance-body">
+                  <tr>
+                    <td colspan="6" class="empty">Loading records…</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+          <section class="card">
+            <div class="card-heading">
+              <h2>
+                Delivery Monitoring
+                <span class="live" data-live>Connecting…</span>
+              </h2>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">Driver</th>
+                    <th scope="col">Truck</th>
+                    <th scope="col">Route</th>
+                    <th scope="col">Delivery Status</th>
+                    <th scope="col">Last Updated</th>
+                  </tr>
+                </thead>
+                <tbody id="delivery-body">
+                  <tr>
+                    <td colspan="5" class="empty">Loading records…</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+          <section class="card">
+            <div class="card-heading">
+              <h2>
+                Driver Maintenance Queue
+                <span class="live" data-live>Connecting…</span>
+              </h2>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">Report ID</th>
+                    <th scope="col">Driver</th>
+                    <th scope="col">Truck / Plate</th>
+                    <th scope="col">Issue</th>
+                    <th scope="col">Priority</th>
+                    <th scope="col">Review State</th>
+                  </tr>
+                </thead>
+                <tbody id="reports-body">
+                  <tr>
+                    <td colspan="6" class="empty">Loading records…</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+    <dialog class="modal" id="detail-dialog" aria-labelledby="detail-title">
+      <div class="modal-head">
+        <h2 id="detail-title">Record Details</h2>
+        <button class="icon-button" data-close aria-label="Close details">
+          ✕
+        </button>
+      </div>
+      <div class="modal-body" id="detail-body"></div>
+    </dialog>
+  </body>
+</html>

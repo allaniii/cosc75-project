@@ -1,0 +1,1 @@
+import{A as e,g as t}from"../dom-B0CXGCmh.js";import{g as n,y as r}from"../format-ClMacsmK.js";import{n as i}from"../data-pyuLZmnN.js";import{n as a,t as o}from"../driver-DIkGRMAs.js";var s=[`attendance`,`company_settings`],c=await n(`driver`,()=>e(s),({data:e})=>{o(e),t(`attendance-body`,i(e.attendance,e,!0),5)});c&&(a(c),r(c,s));

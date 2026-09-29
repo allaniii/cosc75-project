@@ -1,0 +1,20 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> centritruck@1.0.0 test
+> node --test tests/*.test.mjs
+
+✔ business date is Manila, not machine timezone (12.76225ms)
+✔ overnight shift duration is based on timestamps (0.143383ms)
+✔ CSV quotes commas, newlines, embedded quotes and blocks formulas (0.354236ms)
+✔ truck availability comes from trusted server state when available (0.175221ms)
+✔ maintenance without a date is not falsely current (0.161289ms)
+✔ report boundaries, statuses and derived totals agree (1.072624ms)
+✔ invalid report date ordering is rejected (0.411752ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 87.866979

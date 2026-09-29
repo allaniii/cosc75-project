@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>Reports · CentriTruck</title>
+    <script type="module" crossorigin src="../assets/admin/reports-CQ9tgJL9.js"></script>
+    <link rel="modulepreload" crossorigin href="../assets/dom-B0CXGCmh.js">
+    <link rel="modulepreload" crossorigin href="../assets/format-ClMacsmK.js">
+    <link rel="modulepreload" crossorigin href="../assets/data-pyuLZmnN.js">
+    <link rel="modulepreload" crossorigin href="../assets/chart-ClTYS3A0.js">
+    <link rel="stylesheet" crossorigin href="../assets/dom-CN4zQz5b.css">
+  </head>
+  <body data-role="admin" data-page="reports">
+    <a class="skip" href="#main">Skip to content</a>
+    <aside id="sidebar" class="sidebar" aria-label="Main navigation"></aside>
+    <header id="topbar" class="topbar"></header>
+    <main class="main" id="main">
+      <div class="page-header">
+        <div>
+          <h1>Reports</h1>
+          <p>
+            Operational insights, dispatch summaries, and maintenance analytics.
+          </p>
+        </div>
+        <div class="flex">
+          <button class="button secondary" id="print-report">
+            Print / Save PDF</button
+          ><button class="button" id="export-csv">↓ Export CSV</button
+          ><button
+            type="button"
+            class="icon-button"
+            id="refresh"
+            aria-label="Refresh records"
+          >
+            ↻
+          </button>
+        </div>
+      </div>
+      <div id="message" role="status" aria-live="polite"></div>
+      <div id="page-content">
+        <form id="report-filters" class="toolbar">
+          <label>Start Date<input type="date" name="start" required /></label
+          ><label>End Date<input type="date" name="end" required /></label
+          ><label
+            >Truck<select name="truck">
+              <option value="">All trucks</option>
+            </select></label
+          ><label
+            >Driver<select name="driver">
+              <option value="">All drivers</option>
+            </select></label
+          ><label
+            >Status<select name="status">
+              <option value="">All statuses</option>
+              <option value="scheduled">Scheduled</option>
+              <option value="on_way">On Way</option>
+              <option value="not_delivered">Not Delivered</option>
+              <option value="delivered">Delivered</option>
+              <option value="cancelled">Cancelled</option>
+            </select></label
+          ><button class="button gold">Apply Filters</button>
+        </form>
+        <p id="report-context" class="muted"></p>
+        <h2>Operational Insights</h2>
+        <div class="grid grid-4">
+          <article class="card stat">
+            <div class="stat-icon" aria-hidden="true">▦</div>
+            <div class="stat-value" id="report-total">—</div>
+            <div class="stat-label">Total Dispatches</div>
+            <div class="kpi-note"></div>
+          </article>
+          <article class="card stat">
+            <div class="stat-icon" aria-hidden="true">▦</div>
+            <div class="stat-value" id="report-rate">—</div>
+            <div class="stat-label">Completion Rate</div>
+            <div class="kpi-note"></div>
+          </article>
+          <article class="card stat">
+            <div class="stat-icon" aria-hidden="true">◷</div>
+            <div class="stat-value" id="report-duration">—</div>
+            <div class="stat-label">Average Completed Trip</div>
+            <div class="kpi-note"></div>
+          </article>
+          <article class="card stat">
+            <div class="stat-icon" aria-hidden="true">▦</div>
+            <div class="stat-value" id="report-availability">—</div>
+            <div class="stat-label">Available Trucks Now</div>
+            <div class="kpi-note"></div>
+          </article>
+        </div>
+        <h2 class="section">Maintenance & Attendance</h2>
+        <div class="grid grid-4">
+          <article class="card stat">
+            <div class="stat-icon" aria-hidden="true">▦</div>
+            <div class="stat-value" id="report-repairs">—</div>
+            <div class="stat-label">Completed Services</div>
+            <div class="kpi-note"></div>
+          </article>
+          <article class="card stat">
+            <div class="stat-icon" aria-hidden="true">▦</div>
+            <div class="stat-value" id="report-cost">—</div>
+            <div class="stat-label">Maintenance Cost (PHP)</div>
+            <div class="kpi-note"></div>
+          </article>
+          <article class="card stat">
+            <div class="stat-icon" aria-hidden="true">▦</div>
+            <div class="stat-value" id="report-shifts">—</div>
+            <div class="stat-label">Attendance Shifts</div>
+            <div class="kpi-note"></div>
+          </article>
+          <article class="card stat">
+            <div class="stat-icon" aria-hidden="true">▦</div>
+            <div class="stat-value" id="report-hours">—</div>
+            <div class="stat-label">Completed Shift Hours</div>
+            <div class="kpi-note"></div>
+          </article>
+        </div>
+        <div class="grid grid-2 section">
+          <section class="card">
+            <div class="card-heading">
+              <h2>Deliveries — Completed vs Cancelled</h2>
+            </div>
+            <div class="chart-wrap"><canvas id="delivery-chart"></canvas></div>
+          </section>
+          <section class="card">
+            <div class="card-heading"><h2>Common Failure Categories</h2></div>
+            <div class="chart-wrap"><canvas id="failure-chart"></canvas></div>
+          </section>
+          <section class="card">
+            <div class="card-heading"><h2>Dispatch Activity</h2></div>
+            <div class="chart-wrap"><canvas id="activity-chart"></canvas></div>
+          </section>
+          <section class="card">
+            <div class="card-heading"><h2>Maintenance Costs</h2></div>
+            <div class="chart-wrap"><canvas id="cost-chart"></canvas></div>
+          </section>
+        </div>
+        <div class="stack section">
+          <section class="card">
+            <div class="card-heading"><h2>Dispatch Report</h2></div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">Dispatch ID</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Driver</th>
+                    <th scope="col">Plate Number</th>
+                    <th scope="col">Destination</th>
+                    <th scope="col">Schedule</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody id="dispatch-body">
+                  <tr>
+                    <td colspan="7" class="empty">Loading records…</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+          <section class="card">
+            <div class="card-heading"><h2>Repairs per Truck</h2></div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">Truck</th>
+                    <th scope="col">Plate</th>
+                    <th scope="col">Completed Services</th>
+                    <th scope="col">Cost (PHP)</th>
+                  </tr>
+                </thead>
+                <tbody id="repairs-body">
+                  <tr>
+                    <td colspan="4" class="empty">Loading records…</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+          <section class="card">
+            <div class="card-heading"><h2>Attendance Report</h2></div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">Driver Name</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Time In</th>
+                    <th scope="col">Time Out</th>
+                    <th scope="col">Shift Duration</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody id="attendance-body">
+                  <tr>
+                    <td colspan="6" class="empty">Loading records…</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+    <dialog class="modal" id="detail-dialog" aria-labelledby="detail-title">
+      <div class="modal-head">
+        <h2 id="detail-title">Record Details</h2>
+        <button class="icon-button" data-close aria-label="Close details">
+          ✕
+        </button>
+      </div>
+      <div class="modal-body" id="detail-body"></div>
+    </dialog>
+  </body>
+</html>

@@ -1,0 +1,1 @@
+import{S as e,a as t,w as n}from"./dom-B0CXGCmh.js";t(`login-form`,async t=>{await n(t.email,t.password),await e()});

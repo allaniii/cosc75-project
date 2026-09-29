@@ -1,0 +1,1 @@
+import{O as e,j as t,k as n}from"./dom-B0CXGCmh.js";var r=e=>n(`dispatch_save`,e),i=e=>n(`dispatch_cancel`,{id:e}),a=(e,t)=>n(`delivery_status`,{id:e,status:t}),o=n=>e(t().rpc(`check_eligibility`,n));export{r as i,a as n,o as r,i as t};

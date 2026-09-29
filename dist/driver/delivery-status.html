@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>Delivery Status · CentriTruck</title>
+    <script type="module" crossorigin src="../assets/driver/delivery-status-DGmFisMg.js"></script>
+    <link rel="modulepreload" crossorigin href="../assets/dom-B0CXGCmh.js">
+    <link rel="modulepreload" crossorigin href="../assets/format-ClMacsmK.js">
+    <link rel="modulepreload" crossorigin href="../assets/data-pyuLZmnN.js">
+    <link rel="modulepreload" crossorigin href="../assets/dispatch-C8H6aehF.js">
+    <link rel="modulepreload" crossorigin href="../assets/coding-D5QkQvgx.js">
+    <link rel="modulepreload" crossorigin href="../assets/driver-DIkGRMAs.js">
+    <link rel="stylesheet" crossorigin href="../assets/dom-CN4zQz5b.css">
+  </head>
+  <body data-role="driver" data-page="delivery-status">
+    <a class="skip" href="#main">Skip to content</a>
+    <aside id="sidebar" class="sidebar" aria-label="Main navigation"></aside>
+    <header id="topbar" class="topbar"></header>
+    <main class="main" id="main">
+      <div class="page-header">
+        <div>
+          <h1>Delivery Status</h1>
+          <p>Update your current delivery status.</p>
+        </div>
+        <div class="flex">
+          <button
+            type="button"
+            class="icon-button"
+            id="refresh"
+            aria-label="Refresh records"
+          >
+            ↻
+          </button>
+        </div>
+      </div>
+      <div id="message" role="status" aria-live="polite"></div>
+      <div id="page-content">
+        <section class="card">
+          <div class="card-heading"><h2>Current Delivery</h2></div>
+          <dl id="current-delivery" class="detail-grid"></dl>
+        </section>
+        <div class="section">
+          <section class="card">
+            <div class="card-heading"><h2>Number Coding Status</h2></div>
+            <p id="coding-result">Checking configured policy…</p>
+            <small id="coding-context"></small>
+          </section>
+        </div>
+        <div class="section">
+          <section class="card">
+            <div class="card-heading"><h2>Update Status</h2></div>
+            <form id="delivery-form">
+              <label
+                >Assigned Dispatch<select
+                  id="dispatch-choice"
+                  name="id"
+                  required
+                ></select
+              ></label>
+              <fieldset class="section">
+                <legend>Update Status</legend>
+                <div class="choice">
+                  <label
+                    ><input
+                      type="radio"
+                      name="status"
+                      value="on_way"
+                      required
+                    />On the Way</label
+                  ><label
+                    ><input
+                      type="radio"
+                      name="status"
+                      value="delivered"
+                    />Delivered</label
+                  ><label
+                    ><input
+                      type="radio"
+                      name="status"
+                      value="not_delivered"
+                    />Not Yet Delivered</label
+                  >
+                </div>
+              </fieldset>
+              <p class="muted section">
+                Select a status, then confirm to save the update.
+              </p>
+              <button class="button wide">Confirm Status Update</button>
+            </form>
+          </section>
+        </div>
+        <div class="section">
+          <section class="card">
+            <div class="card-heading"><h2>Route Progress</h2></div>
+            <p class="muted">Stored delivery milestones · not live GPS</p>
+            <ol id="delivery-timeline" class="timeline"></ol>
+          </section>
+        </div>
+      </div>
+    </main>
+    <dialog class="modal" id="detail-dialog" aria-labelledby="detail-title">
+      <div class="modal-head">
+        <h2 id="detail-title">Record Details</h2>
+        <button class="icon-button" data-close aria-label="Close details">
+          ✕
+        </button>
+      </div>
+      <div class="modal-body" id="detail-body"></div>
+    </dialog>
+  </body>
+</html>
