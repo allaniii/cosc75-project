@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>Welcome back · CentriTruck</title>
+    <link rel="stylesheet" href="../assets/css/app.css" />
+  </head>
+  <body data-role="driver" data-page="dashboard">
+    <a class="skip" href="#main">Skip to content</a>
+    <aside id="sidebar" class="sidebar" aria-label="Main navigation"></aside>
+    <header id="topbar" class="topbar"></header>
+    <main class="main" id="main">
+      <div class="page-header">
+        <div>
+          <h1>Welcome back</h1>
+          <p>Here is your overview for today.</p>
+        </div>
+        <div class="flex">
+          <button
+            type="button"
+            class="icon-button"
+            id="refresh"
+            aria-label="Refresh records"
+          >
+            ↻
+          </button>
+        </div>
+      </div>
+      <div id="message" role="status" aria-live="polite"></div>
+      <div id="page-content">
+        <section class="card">
+          <div class="card-heading"><h2>Driver Information</h2></div>
+          <dl id="driver-info" class="detail-grid"></dl>
+        </section>
+        <div class="section">
+          <section class="card">
+            <div class="card-heading"><h2>Number Coding Status</h2></div>
+            <p id="coding-result">Checking configured policy…</p>
+            <small id="coding-context"></small>
+          </section>
+        </div>
+        <div class="section">
+          <section class="card">
+            <div class="card-heading"><h2>Current Delivery</h2></div>
+            <dl id="current-delivery" class="detail-grid"></dl>
+            <a class="button wide" href="delivery-status.html"
+              >Update Delivery Status</a
+            >
+          </section>
+        </div>
+        <div class="section">
+          <section class="card">
+            <div class="card-heading">
+              <h2>
+                Your Attendance <span class="live" data-live>Connecting…</span>
+              </h2>
+            </div>
+            <div class="grid grid-2">
+              <button id="time-in" class="button">◷ Time In</button
+              ><button id="time-out" class="button secondary">
+                ◷ Time Out
+              </button>
+            </div>
+            <p id="active-shift" class="muted section">
+              Checking current shift…
+            </p>
+          </section>
+        </div>
+        <div class="section">
+          <section class="card">
+            <div class="card-heading"><h2>Your Weekly Report</h2></div>
+            <div class="grid grid-3">
+              <article class="card stat">
+                <div class="stat-icon" aria-hidden="true">▦</div>
+                <div class="stat-value" id="completed-trips">—</div>
+                <div class="stat-label">Completed Trips</div>
+                <div class="kpi-note"></div>
+              </article>
+              <article class="card stat">
+                <div class="stat-icon" aria-hidden="true">▦</div>
+                <div class="stat-value" id="working-hours">—</div>
+                <div class="stat-label">Completed Shift Hours</div>
+                <div class="kpi-note"></div>
+              </article>
+              <article class="card stat">
+                <div class="stat-icon" aria-hidden="true">▦</div>
+                <div class="stat-value" id="open-reports">—</div>
+                <div class="stat-label">Open Reports</div>
+                <div class="kpi-note"></div>
+              </article>
+            </div>
+            <div class="chart-wrap section">
+              <canvas id="driver-chart"></canvas>
+            </div>
+          </section>
+        </div>
+        <div class="section">
+          <section class="card">
+            <div class="card-heading"><h2>Assigned Truck Status</h2></div>
+            <div id="assigned-vehicle"></div>
+            <a class="subtle-link" href="my-truck.html">View details</a>
+          </section>
+        </div>
+      </div>
+    </main>
+    <dialog class="modal" id="detail-dialog" aria-labelledby="detail-title">
+      <div class="modal-head">
+        <h2 id="detail-title">Record Details</h2>
+        <button class="icon-button" data-close aria-label="Close details">
+          ✕
+        </button>
+      </div>
+      <div class="modal-body" id="detail-body"></div>
+    </dialog>
+    <script type="module" src="../assets/js/pages/driver/dashboard.js"></script>
+  </body>
+</html>

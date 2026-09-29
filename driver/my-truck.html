@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>My Truck · CentriTruck</title>
+    <link rel="stylesheet" href="../assets/css/app.css" />
+  </head>
+  <body data-role="driver" data-page="my-truck">
+    <a class="skip" href="#main">Skip to content</a>
+    <aside id="sidebar" class="sidebar" aria-label="Main navigation"></aside>
+    <header id="topbar" class="topbar"></header>
+    <main class="main" id="main">
+      <div class="page-header">
+        <div>
+          <h1>My Truck</h1>
+          <p>View your assigned vehicle details.</p>
+        </div>
+        <div class="flex">
+          <button
+            type="button"
+            class="icon-button"
+            id="refresh"
+            aria-label="Refresh records"
+          >
+            ↻
+          </button>
+        </div>
+      </div>
+      <div id="message" role="status" aria-live="polite"></div>
+      <div id="page-content">
+        <section class="card">
+          <div class="card-heading"><h2>Assigned Vehicle</h2></div>
+          <div id="assigned-vehicle"></div>
+        </section>
+        <div class="section">
+          <section class="card">
+            <div class="card-heading"><h2>Number Coding Status</h2></div>
+            <p id="coding-result">Checking configured policy…</p>
+            <small id="coding-context"></small>
+          </section>
+        </div>
+        <div class="section">
+          <section class="card">
+            <div class="card-heading"><h2>Vehicle Details</h2></div>
+            <dl id="truck-details" class="detail-grid"></dl>
+          </section>
+        </div>
+        <div class="section">
+          <section class="card">
+            <div class="card-heading"><h2>Temporary Dispatch Vehicles</h2></div>
+            <div id="temporary-trucks"></div>
+          </section>
+        </div>
+      </div>
+    </main>
+    <dialog class="modal" id="detail-dialog" aria-labelledby="detail-title">
+      <div class="modal-head">
+        <h2 id="detail-title">Record Details</h2>
+        <button class="icon-button" data-close aria-label="Close details">
+          ✕
+        </button>
+      </div>
+      <div class="modal-body" id="detail-body"></div>
+    </dialog>
+    <script type="module" src="../assets/js/pages/driver/my-truck.js"></script>
+  </body>
+</html>

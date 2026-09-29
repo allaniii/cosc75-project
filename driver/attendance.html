@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>Attendance · CentriTruck</title>
+    <link rel="stylesheet" href="../assets/css/app.css" />
+  </head>
+  <body data-role="driver" data-page="attendance">
+    <a class="skip" href="#main">Skip to content</a>
+    <aside id="sidebar" class="sidebar" aria-label="Main navigation"></aside>
+    <header id="topbar" class="topbar"></header>
+    <main class="main" id="main">
+      <div class="page-header">
+        <div>
+          <h1>Attendance</h1>
+          <p>Track your daily time in and time out.</p>
+        </div>
+        <div class="flex">
+          <button
+            type="button"
+            class="icon-button"
+            id="refresh"
+            aria-label="Refresh records"
+          >
+            ↻
+          </button>
+        </div>
+      </div>
+      <div id="message" role="status" aria-live="polite"></div>
+      <div id="page-content">
+        <section class="card">
+          <div class="card-heading">
+            <h2>
+              Today’s Attendance <span class="live" data-live>Connecting…</span>
+            </h2>
+          </div>
+          <div class="grid grid-2">
+            <button id="time-in" class="button">◷ Time In</button
+            ><button id="time-out" class="button secondary">◷ Time Out</button>
+          </div>
+          <p id="active-shift" class="muted section">Checking current shift…</p>
+        </section>
+        <div class="section">
+          <section class="card">
+            <div class="card-heading"><h2>Attendance History</h2></div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Time In</th>
+                    <th scope="col">Time Out</th>
+                    <th scope="col">Shift Duration</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody id="attendance-body">
+                  <tr>
+                    <td colspan="5" class="empty">Loading records…</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+    <dialog class="modal" id="detail-dialog" aria-labelledby="detail-title">
+      <div class="modal-head">
+        <h2 id="detail-title">Record Details</h2>
+        <button class="icon-button" data-close aria-label="Close details">
+          ✕
+        </button>
+      </div>
+      <div class="modal-body" id="detail-body"></div>
+    </dialog>
+    <script
+      type="module"
+      src="../assets/js/pages/driver/attendance.js"
+    ></script>
+  </body>
+</html>
