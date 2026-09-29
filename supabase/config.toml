@@ -1,0 +1,33 @@
+project_id = "centritruck"
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "graphql_public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+[db]
+port = 54322
+shadow_port = 54320
+major_version = 17
+[studio]
+enabled = true
+port = 54323
+[auth]
+enabled = true
+site_url = "http://localhost:5173"
+additional_redirect_urls = ["http://localhost:5173/reset-password.html", "http://localhost:4173/reset-password.html"]
+enable_signup = false
+minimum_password_length = 12
+[storage]
+enabled = true
+file_size_limit = "5MiB"
+[realtime]
+enabled = true
+# Modern publishable keys are not JWTs. Both functions validate the user's
+# Bearer token with auth.getUser and check the active database role themselves.
+[functions.driver-admin]
+verify_jwt = false
+[functions.route]
+verify_jwt = false
+[functions.maintenance-photo]
+verify_jwt = false
